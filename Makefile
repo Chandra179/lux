@@ -1,13 +1,14 @@
 GO ?= go
 GOLANGCI_LINT ?= golangci-lint
 NPM ?= npm
+PODMAN ?= podman
 
 BINARY ?= bin/lux-server
 APP_ENVIRONMENT ?= dev
 SQLITE_DSN ?= lux.db
 BADGER_DIR ?= lux
 
-.PHONY: all build run test lint fmt tidy verify migrate-up docker-build \
+.PHONY: all build run test lint fmt tidy verify migrate-up podman-build \
 	web-install web-dev web-build web-lint web-typecheck
 
 all: verify lint test build
@@ -37,8 +38,8 @@ verify:
 migrate-up:
 	$(GO) run github.com/pressly/goose/v3/cmd/goose@latest -dir server/store/migrations/sqlite sqlite3 "$(SQLITE_DSN)" up
 
-docker-build:
-	docker build -t lux-server .
+podman-build:
+	$(PODMAN) build -t lux-server .
 
 web-install:
 	$(NPM) --prefix web ci

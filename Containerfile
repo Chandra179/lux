@@ -1,4 +1,4 @@
-FROM golang:1.27 AS build
+FROM docker.io/library/golang:1.27 AS build
 
 WORKDIR /src
 
@@ -8,7 +8,7 @@ RUN go mod download
 COPY . .
 RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/lux-server ./server/cmd/example
 
-FROM alpine:3.22
+FROM docker.io/library/alpine:3.22
 
 RUN addgroup -S lux \
     && adduser -S -G lux lux \

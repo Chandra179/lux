@@ -8,6 +8,9 @@ updates:
     directory: /
     schedule:
       interval: weekly
+  # "docker" is Dependabot's fixed ecosystem name (there is no podman option).
+  # Note: it does not yet detect files named "Containerfile"; only "Dockerfile".
+  # https://github.com/dependabot/dependabot-core/issues/6067
   - package-ecosystem: docker
     directory: /
     schedule:

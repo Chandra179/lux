@@ -87,14 +87,14 @@ for f in server/config/config_dev.yaml server/config/config_prd.yaml; do
 done
 echo "  updated environment and datastore names"
 
-# 9. Update project documentation and Docker/Makefile entrypoint paths.
+# 9. Update project documentation and Containerfile/Makefile entrypoint paths.
 find . -path './vendor' -prune -o -path './.git' -prune -o -type f -name '*.md' -exec sed -i \
 	-e "s|$old/|$new/|g" \
 	-e "s|server/cmd/example|server/cmd/$new_name|g" \
 	-e "s|\<Lux\>|$new_title|g" \
 	-e "s|\<lux\>|$new_name|g" \
 	{} +
-sed -i "s|server/cmd/example|server/cmd/$new_name|g" Dockerfile Makefile
-echo "  updated documentation, Dockerfile, and Makefile"
+sed -i "s|server/cmd/example|server/cmd/$new_name|g" Containerfile Makefile
+echo "  updated documentation, Containerfile, and Makefile"
 
 echo "Done. Run 'go test ./...' and 'go build ./...' to verify the renamed module."

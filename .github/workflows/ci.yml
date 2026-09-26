@@ -52,5 +52,5 @@ jobs:
       - name: Build
         run: go build ./...
 
-      - name: Docker build
-        run: docker build .
+      - name: Podman build
+        run: podman build .
